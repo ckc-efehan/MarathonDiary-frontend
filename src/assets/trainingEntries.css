@@ -1,0 +1,34 @@
+.training-entries {
+    background-color: #f4f4f4; /* Hintergrundfarbe */
+    padding: 20px; /* Innenabstand */
+    border-radius: 10px; /* Abgerundete Ecken */
+}
+
+.training-entries h2 {
+    color: #000000; /* Farbe der Überschrift */
+    text-align: center; /* Zentriert den Text */
+}
+
+.training-entries ul {
+    list-style-type: none; /* Entfernt die Listensymbole */
+    padding: 0; /* Entfernt den Innenabstand */
+}
+
+.training-entries li {
+    margin-bottom: 10px; /* Abstand zwischen den Listenelementen */
+    border-bottom: 1px solid #ccc; /* Trennlinie zwischen den Elementen */
+    padding-bottom: 10px; /* Abstand am unteren Rand jedes Eintrags */
+}
+
+.entry h3 {
+    color: #007BFF; /* Blaue Farbe für die Datumsanzeige */
+}
+
+.entry p {
+    color: #666; /* Dunkelgraue Textfarbe */
+    margin: 5px 0; /* Vertikaler Abstand für jeden Paragraphen */
+}
+
+.bold-text {
+    font-weight: bold; /* Macht den Text fett */
+}
