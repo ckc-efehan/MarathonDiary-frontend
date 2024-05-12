@@ -1,7 +1,24 @@
+#app {
+    display: flex;
+    justify-content: center; /* Zentriert die Kinder horizontal */
+    align-items: center; /* Zentriert die Kinder vertikal */
+    min-height: 100vh; /* Gibt dem Container die volle Höhe des Viewports */
+}
+
+.page-container {
+    align-self: center;
+    display: flex; /* Aktiviert Flexbox */
+    flex-direction: column; /* Stapelt die Kinder vertikal */
+    justify-content: center; /* Zentriert Inhalte vertikal */
+    align-items: center; /* Zentriert Inhalte horizontal */
+    height: 100vh; /* Setzt die Höhe auf die gesamte Ansichtshöhe */
+}
+
 .training-entries {
     background-color: #f4f4f4; /* Hintergrundfarbe */
     padding: 20px; /* Innenabstand */
-    border-radius: 10px; /* Abgerundete Ecken */
+    border-radius: 20px; /* Abgerundete Ecken */
+    width: 200%; /* Breite des Containers */
 }
 
 .training-entries h2 {

@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       trainingEntries: [
-        { id: 1, date: '2023-05-01',goalKilometers: 5, kilometers: 5,goalTime:30, time: '30 min', goalAchieved: true },
+        { id: 1, date: '2023-05-01',goalKilometers: 5, kilometers: 5,goalTime:30, time: '29 min', goalAchieved: true },
         { id: 2, date: '2023-05-02',goalKilometers: 11, kilometers: 10,goalTime: 90, time: '90 min', goalAchieved: false},
       ]
     }
