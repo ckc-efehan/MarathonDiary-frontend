@@ -20,7 +20,6 @@
 <script>
 import '@/assets/trainingEntries.css';
 
-
 export default {
   name: 'TrainingEntries',
   props: {
