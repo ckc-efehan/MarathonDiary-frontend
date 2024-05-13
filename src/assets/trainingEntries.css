@@ -1,6 +1,6 @@
 
 body {
-    background: linear-gradient(to bottom, #c9d6ff, #ffffff); /* Beginnt mit einem sanften Blau und verläuft sanft in Weiß */
+    background: linear-gradient(to right, #c9d6ff, #ffffff); /* Beginnt mit einem sanften Blau und verläuft sanft in Weiß */
     margin: 0; /* Entfernt den Standard-Außenabstand */
     height: 100vh; /* Gibt dem Container die volle Höhe des Viewports */
     display: flex;
@@ -22,13 +22,15 @@ body {
     justify-content: center; /* Zentriert Inhalte vertikal */
     align-items: center; /* Zentriert Inhalte horizontal */
     height: 100vh; /* Setzt die Höhe auf die gesamte Ansichtshöhe */
+    width: 100vw;
+    background: inherit;
 }
 
 .training-entries {
     background-color: #ffffff; /* Hintergrundfarbe */
     padding: 20px; /* Innenabstand */
     border-radius: 20px; /* Abgerundete Ecken */
-    width: 200%; /* Breite des Containers */
+    width: 30%; /* Breite des Containers */
 }
 
 .training-entries h2 {
