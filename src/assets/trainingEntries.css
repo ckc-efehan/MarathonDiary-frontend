@@ -30,7 +30,7 @@ body {
     background-color: #ffffff; /* Hintergrundfarbe */
     padding: 20px; /* Innenabstand */
     border-radius: 20px; /* Abgerundete Ecken */
-    width: 30%; /* Breite des Containers */
+    width: 20%; /* Breite des Containers */
 }
 
 .training-entries h2 {
