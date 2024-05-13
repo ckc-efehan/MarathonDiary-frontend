@@ -1,4 +1,5 @@
 <template>
+  <body>
   <div class="page-container">
     <div class="training-entries">
       <h2>Trainingsübersicht</h2>
@@ -17,6 +18,8 @@
       </ul>
     </div>
   </div>
+  </body>
+
 
 </template>
 
