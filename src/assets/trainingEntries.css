@@ -1,64 +1,39 @@
-
-body {
-    background: linear-gradient(to right, #c9d6ff, #ffffff);
-    margin: 0; /* Entfernt den Standard-Außenabstand */
-    height: 100vh; /* Gibt dem Container die volle Höhe des Viewports */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#app {
-    display: flex;
-    justify-content: center; /* Zentriert die Kinder horizontal */
-    align-items: center; /* Zentriert die Kinder vertikal */
-    min-height: 100vh; /* Gibt dem Container die volle Höhe des Viewports */
-}
-
-.page-container {
-    align-self: center;
-    display: flex; /* Aktiviert Flexbox */
-    flex-direction: column; /* Stapelt die Kinder vertikal */
-    justify-content: center; /* Zentriert Inhalte vertikal */
-    align-items: center; /* Zentriert Inhalte horizontal */
-    height: 100vh; /* Setzt die Höhe auf die gesamte Ansichtshöhe */
-    width: 100vw;
-    background: inherit;
-}
-
 .training-entries {
-    background-color: #ffffff; /* Hintergrundfarbe */
-    padding: 20px; /* Innenabstand */
-    border-radius: 20px; /* Abgerundete Ecken */
-    width: 20%; /* Breite des Containers */
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Fügt Schatten hinzu */
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    max-height: 80vh;
 }
 
 .training-entries h2 {
-    color: #000000; /* Farbe der Überschrift */
-    text-align: center; /* Zentriert den Text */
+    color: #000000;
+    text-align: center;
 }
 
 .training-entries ul {
-    list-style-type: none; /* Entfernt die Listensymbole */
-    padding: 0; /* Entfernt den Innenabstand */
+    list-style-type: none;
+    padding: 0;
 }
 
 .training-entries li {
-    margin-bottom: 10px; /* Abstand zwischen den Listenelementen */
-    border-bottom: 1px solid #ccc; /* Trennlinie zwischen den Elementen */
-    padding-bottom: 10px; /* Abstand am unteren Rand jedes Eintrags */
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
 }
 
 .entry h3 {
-    color: #007BFF; /* Blaue Farbe für die Datumsanzeige */
+    color: #007BFF;
 }
 
 .entry p {
-    color: #666; /* Dunkelgraue Textfarbe */
-    margin: 5px 0; /* Vertikaler Abstand für jeden Paragraphen */
+    color: #666;
+    margin: 5px 0;
 }
 
 .bold-text {
-    font-weight: bold; /* Macht den Text fett */
+    font-weight: bold;
 }

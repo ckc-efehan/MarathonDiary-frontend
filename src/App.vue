@@ -3,7 +3,9 @@
 <script>
 import axios from 'axios';
 import './assets/appStyles.css';
+import './assets/trainingEntries.css';
 import TrainingEntries from './components/TrainingEntries.vue';
+
 
 export default {
   name: 'App',
