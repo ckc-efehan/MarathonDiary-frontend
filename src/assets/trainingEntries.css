@@ -1,20 +1,23 @@
 .training-entries {
-    background-color: #ffffff;
+    background-color: var(--background-color);
     padding: 20px;
     border-radius: 20px;
-    max-width: 600px;
+    max-width: 90%;
     width: 100%;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     overflow-y: auto;
     max-height: 80vh;
+}
 
+@media (min-width: 768px) {
+    .training-entries {
+        max-width: 600px;
+    }
 }
 
 .training-entries h2 {
-    color: #000000;
+    color: var(--text-color);
     text-align: center;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 15px;
 }
 
 .training-entries ul {
@@ -23,14 +26,25 @@
 }
 
 .training-entries li {
+    background: var(--background-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 10px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
+    padding: 15px;
+    transition: transform 0.3s;
+}
+
+.training-entries li:hover {
+    transform: translateY(-5px);
 }
 
 .entry h3 {
-    color: #007BFF;
+    color: var(--primary-color);
+    transition: color 0.3s;
+}
+
+.entry h3:hover {
+    color: var(--hover-color);
 }
 
 .entry p {

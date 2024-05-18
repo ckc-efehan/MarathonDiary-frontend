@@ -1,7 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #007BFF;
+    --secondary-color: #c9d6ff;
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --hover-color: #0056b3;
+}
+
 body {
-    background: linear-gradient(to right, #c9d6ff, #ffffff);
+    background: linear-gradient(to right, var(--secondary-color), var(--background-color));
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
+    color: var(--text-color);
 }
 
 #app {
@@ -14,8 +25,8 @@ body {
 
 .navbar {
     width: 100%;
-    background: white;
-    color: #333;
+    background: var(--background-color);
+    color: var(--text-color);
     padding: 10px 0;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
@@ -30,12 +41,13 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    flex-wrap: wrap;
 }
 
 .navbar-brand {
     font-size: 24px;
     text-decoration: none;
-    color: #000000;
+    color: var(--text-color);
 }
 
 .navbar-nav {
@@ -43,20 +55,35 @@ body {
     display: flex;
     margin: 0;
     padding: 0;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .navbar-nav li {
-    margin-left: 20px;
+    margin: 10px 0;
 }
 
 .navbar-nav a {
     text-decoration: none;
-    color: #000000;
+    color: var(--text-color);
     font-size: 18px;
+    transition: color 0.3s, text-decoration 0.3s;
 }
 
 .navbar-nav a:hover {
+    color: var(--primary-color);
     text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .navbar-nav li {
+        margin: 0 20px;
+    }
 }
 
 .content {
