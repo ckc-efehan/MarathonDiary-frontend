@@ -21,12 +21,18 @@ export default {
   },
   methods: {
     fetchEntries() {
-      axios.get('http://localhost:8080/entries')
-          .then(response => {
+      axios.get(import.meta.env.VITE_BACKEND_URL + '/entries')
+          .then(function (response) {
+            // handle success
+            console.log(response);
             this.trainingEntries = response.data;
+          }.bind(this))
+          .catch(function (error) {
+            // handle error
+            console.log(error);
           })
-          .catch(error => {
-            console.error("There was an error fetching the entries:", error);
+          .finally(function () {
+            // always executed
           });
     }
   }
