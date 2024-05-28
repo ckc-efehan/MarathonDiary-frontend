@@ -71,8 +71,6 @@ body {
 }
 
 .navbar-nav a:hover {
-    color: var(--primary-color);
-    text-decoration: underline;
 }
 
 @media (min-width: 768px) {
