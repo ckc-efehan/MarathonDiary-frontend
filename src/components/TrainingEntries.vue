@@ -49,10 +49,6 @@ export default {
     }
   },
   methods: {
-    goalReached(targetTime, targetKilometer, timeRan, kilometreRan) {
-      return (targetTime === timeRan && targetKilometer === kilometreRan) ||
-          (targetTime < timeRan || targetKilometer < kilometreRan);
-    },
     submitEntry() {
       const newEntry = {
         targetTime: parseFloat(this.zielZeit),
