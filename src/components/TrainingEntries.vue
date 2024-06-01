@@ -22,6 +22,7 @@
           <p>Gelaufene Kilometer: <span class="bold-text">{{ entry.kilometreRan }} km</span></p>
           <p>Benötigte Zeit: <span class="bold-text">{{ entry.timeRan }} h</span></p>
           <p>Ziel erreicht: <span class="bold-text">{{ entry.goalReached ? 'Ja' : 'Nein' }}</span></p>
+          <button @click="deleteEntry">Löschen</button>
         </div>
       </li>
     </ul>
@@ -48,13 +49,17 @@ export default {
     }
   },
   methods: {
+    goalReached(targetTime, targetKilometer, timeRan, kilometreRan) {
+      return (targetTime === timeRan && targetKilometer === kilometreRan) ||
+          (targetTime < timeRan || targetKilometer < kilometreRan);
+    },
     submitEntry() {
       const newEntry = {
         targetTime: parseFloat(this.zielZeit),
         targetKilometre: parseFloat(this.zielKilometer),
         kilometreRan: parseFloat(this.gelaufeneKilometer),
         timeRan: parseFloat(this.gelaufeneZeit),
-        goalReached: parseFloat(this.gelaufeneKilometer) >= parseFloat(this.zielKilometer)
+        goalReached: this.goalReached(parseFloat(this.zielZeit), parseFloat(this.zielKilometer), parseFloat(this.gelaufeneZeit), parseFloat(this.gelaufeneKilometer))
       };
 
       axios.post(import.meta.env.VITE_BACKEND_URL + '/entries', newEntry)
@@ -68,6 +73,15 @@ export default {
           })
           .catch(error => {
             console.error('Error adding entry:', error);
+          });
+    },
+    deleteEntry(entryId) {
+      axios.delete(import.meta.env.VITE_BACKEND_URL + '/entries/' + entryId)
+          .then(response => {
+            // Do something after successful deletion, like updating the UI
+          })
+          .catch(error => {
+            console.error('Error deleting entry:', error);
           });
     }
   }

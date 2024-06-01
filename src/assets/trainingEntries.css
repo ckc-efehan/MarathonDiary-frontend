@@ -9,6 +9,20 @@
     max-height: 75vh;
 }
 
+.training-entries button {
+    background-color: #950e0e;
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
 @media (min-width: 768px) {
     .training-entries {
         max-width: 600px;
