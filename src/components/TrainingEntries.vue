@@ -2,19 +2,19 @@
   <div class="newtrainingsentry">
     <h2>Neuer Trainingseintrag</h2>
     <span>Geben Sie hier ein wie viele Kilometer Ihr Ziel ist</span>
-    <input type="zielZeit" placeholder="Ziel-Zeit">
+    <input v-model="zielZeit" type="text" placeholder="Ziel-Zeit">
     <span>Geben Sie hier ein in welcher Zeit (in Stunden) Sie das schaffen wollen</span>
-    <input type="zielKilometer" placeholder="Ziel-Kilometer">
+    <input v-model="zielKilometer" type="text" placeholder="Ziel-Kilometer">
     <span>Geben Sie hier ein wie viel Kilometer Sie gerannt sind</span>
-    <input type="gelaufeneKilometer" placeholder="Gelaufene Kilometer">
+    <input v-model="gelaufeneKilometer" type="text" placeholder="Gelaufene Kilometer">
     <span>Geben Sie hier ein in welcher Zeit (in Stunden) Sie die Kilometer gelaufen sind</span>
-    <input type="gelaufeneZeit" placeholder="Gelaufene Zeit">
-    <button>Senden</button>
+    <input v-model="gelaufeneZeit" type="text" placeholder="Gelaufene Zeit">
+    <button @click="submitEntry">Senden</button>
   </div>
   <div class="training-entries">
     <h2>Trainingsübersicht</h2>
     <ul>
-      <li v-for="entry in entries" :key="entry.date">
+      <li v-for="entry in entries" :key="entry.id">
         <div class="entry">
           <h3>{{ entry.date }}</h3>
           <p>Ziel-Zeit: <span class="bold-text">{{ entry.targetTime }} h</span></p>
@@ -29,12 +29,46 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'TrainingEntries',
   props: {
     entries: {
       type: Array,
       required: true
+    }
+  },
+  data() {
+    return {
+      zielZeit: '',
+      zielKilometer: '',
+      gelaufeneKilometer: '',
+      gelaufeneZeit: ''
+    }
+  },
+  methods: {
+    submitEntry() {
+      const newEntry = {
+        targetTime: parseFloat(this.zielZeit),
+        targetKilometre: parseFloat(this.zielKilometer),
+        kilometreRan: parseFloat(this.gelaufeneKilometer),
+        timeRan: parseFloat(this.gelaufeneZeit),
+        goalReached: parseFloat(this.gelaufeneKilometer) >= parseFloat(this.zielKilometer)
+      };
+
+      axios.post(import.meta.env.VITE_BACKEND_URL + '/entries', newEntry)
+          .then(response => {
+            this.$emit('entry-added', response.data);
+            // Clear the input fields
+            this.zielZeit = '';
+            this.zielKilometer = '';
+            this.gelaufeneKilometer = '';
+            this.gelaufeneZeit = '';
+          })
+          .catch(error => {
+            console.error('Error adding entry:', error);
+          });
     }
   }
 }

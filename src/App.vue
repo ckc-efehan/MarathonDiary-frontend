@@ -34,6 +34,9 @@ export default {
           .finally(function () {
             // always executed
           });
+    },
+    addEntry(newEntry) {
+      this.trainingEntries.push(newEntry);
     }
   }
 }
