@@ -70,6 +70,7 @@ export default {
             this.zielKilometer = '';
             this.gelaufeneKilometer = '';
             this.gelaufeneZeit = '';
+            window.location.reload();
           })
           .catch(error => {
             console.error('Error adding entry:', error);
@@ -80,6 +81,7 @@ export default {
           .then(() => {
             // Remove the deleted entry from the list
             this.entries = this.entries.filter(entry => entry.id !== entryId);
+            window.location.reload();
           })
           .catch(error => {
             console.error('Error deleting entry:', error);

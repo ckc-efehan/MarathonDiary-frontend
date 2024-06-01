@@ -34,19 +34,6 @@ export default {
           .finally(function () {
             // always executed
           });
-    },
-    addEntry(newEntry) {
-      this.trainingEntries.push(newEntry);
-    },
-    deleteEntry(entryId) {
-      axios.delete(import.meta.env.VITE_BACKEND_URL + '/entries/' + entryId)
-          .then(() => {
-            // Remove the deleted entry from the list
-            this.trainingEntries = this.trainingEntries.filter(entry => entry.id !== entryId);
-          })
-          .catch(error => {
-            console.error('Error deleting entry:', error);
-          });
     }
   }
 }
