@@ -22,7 +22,7 @@
           <p>Gelaufene Kilometer: <span class="bold-text">{{ entry.kilometreRan }} km</span></p>
           <p>Benötigte Zeit: <span class="bold-text">{{ entry.timeRan }} h</span></p>
           <p>Ziel erreicht: <span class="bold-text">{{ entry.goalReached ? 'Ja' : 'Nein' }}</span></p>
-          <button @click="deleteEntry">Löschen</button>
+          <button @click="deleteEntry(entry.id)">Löschen</button>
         </div>
       </li>
     </ul>
@@ -77,8 +77,9 @@ export default {
     },
     deleteEntry(entryId) {
       axios.delete(import.meta.env.VITE_BACKEND_URL + '/entries/' + entryId)
-          .then(response => {
-            // Do something after successful deletion, like updating the UI
+          .then(() => {
+            // Remove the deleted entry from the list
+            this.entries = this.entries.filter(entry => entry.id !== entryId);
           })
           .catch(error => {
             console.error('Error deleting entry:', error);
