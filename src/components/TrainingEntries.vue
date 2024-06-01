@@ -49,6 +49,10 @@ export default {
     }
   },
   methods: {
+    goalReached(targetTime, targetKilometer, timeRan, kilometreRan) {
+      return (targetTime === timeRan && targetKilometer === kilometreRan) ||
+          (targetTime < timeRan || targetKilometer < kilometreRan);
+    },
     submitEntry() {
       const newEntry = {
         targetTime: parseFloat(this.zielZeit),
@@ -66,6 +70,7 @@ export default {
             this.zielKilometer = '';
             this.gelaufeneKilometer = '';
             this.gelaufeneZeit = '';
+            this.fetchEntries();
           })
           .catch(error => {
             console.error('Error adding entry:', error);
@@ -75,7 +80,8 @@ export default {
       axios.delete(import.meta.env.VITE_BACKEND_URL + '/entries/' + entryId)
           .then(() => {
             // Remove the deleted entry from the list
-            this.$emit('entry-deleted', entryId);
+            this.entries = this.entries.filter(entry => entry.id !== entryId);
+            this.fetchEntries();
           })
           .catch(error => {
             console.error('Error deleting entry:', error);
