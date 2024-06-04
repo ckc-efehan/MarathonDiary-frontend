@@ -1,31 +1,43 @@
 <template>
-  <div class="newtrainingsentry">
-    <h2>Neuer Trainingseintrag</h2>
-    <span>Geben Sie hier ein wie viele Kilometer Ihr Ziel ist</span>
-    <input v-model="zielZeit" type="text" placeholder="Ziel-Zeit">
-    <span>Geben Sie hier ein in welcher Zeit (in Stunden) Sie das schaffen wollen</span>
-    <input v-model="zielKilometer" type="text" placeholder="Ziel-Kilometer">
-    <span>Geben Sie hier ein wie viel Kilometer Sie gerannt sind</span>
-    <input v-model="gelaufeneKilometer" type="text" placeholder="Gelaufene Kilometer">
-    <span>Geben Sie hier ein in welcher Zeit (in Stunden) Sie die Kilometer gelaufen sind</span>
-    <input v-model="gelaufeneZeit" type="text" placeholder="Gelaufene Zeit">
-    <button @click="submitEntry">Senden</button>
-  </div>
-  <div class="training-entries">
-    <h2>Trainingsübersicht</h2>
-    <ul>
-      <li v-for="entry in trainingEntries" :key="entry.id">
-        <div class="entry">
-          <h3>{{ entry.date }}</h3>
-          <p>Ziel-Zeit: <span class="bold-text">{{ entry.targetTime }} h</span></p>
-          <p>Ziel-Kilometer: <span class="bold-text">{{ entry.targetKilometre }} km</span></p>
-          <p>Gelaufene Kilometer: <span class="bold-text">{{ entry.kilometreRan }} km</span></p>
-          <p>Benötigte Zeit: <span class="bold-text">{{ entry.timeRan }} h</span></p>
-          <p>Ziel erreicht: <span class="bold-text">{{ entry.goalReached ? 'Ja' : 'Nein' }}</span></p>
-          <button @click="deleteEntry(entry.id)">Löschen</button>
-        </div>
-      </li>
-    </ul>
+  <div id="app">
+    <nav class="navbar">
+      <div class="navbar-container">
+        <h1>Meine Trainingsseite</h1>
+        <ul class="navbar-nav">
+          <li><a href="#"><i class="fas fa-home"></i> Abmelden</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="content">
+      <div class="newtrainingsentry">
+        <h2>Neuer Trainingseintrag</h2>
+        <span>Geben Sie hier ein wie viele Kilometer Ihr Ziel ist</span>
+        <input v-model="zielZeit" type="text" placeholder="Ziel-Zeit">
+        <span>Geben Sie hier ein in welcher Zeit (in Stunden) Sie das schaffen wollen</span>
+        <input v-model="zielKilometer" type="text" placeholder="Ziel-Kilometer">
+        <span>Geben Sie hier ein wie viel Kilometer Sie gerannt sind</span>
+        <input v-model="gelaufeneKilometer" type="text" placeholder="Gelaufene Kilometer">
+        <span>Geben Sie hier ein in welcher Zeit (in Stunden) Sie die Kilometer gelaufen sind</span>
+        <input v-model="gelaufeneZeit" type="text" placeholder="Gelaufene Zeit">
+        <button @click="submitEntry">Senden</button>
+      </div>
+      <div class="training-entries">
+        <h2>Trainingsübersicht</h2>
+        <ul>
+          <li v-for="entry in trainingEntries" :key="entry.id">
+            <div class="entry">
+              <h3>{{ entry.date }}</h3>
+              <p>Ziel-Zeit: <span class="bold-text">{{ entry.targetTime }} h</span></p>
+              <p>Ziel-Kilometer: <span class="bold-text">{{ entry.targetKilometre }} km</span></p>
+              <p>Gelaufene Kilometer: <span class="bold-text">{{ entry.kilometreRan }} km</span></p>
+              <p>Benötigte Zeit: <span class="bold-text">{{ entry.timeRan }} h</span></p>
+              <p>Ziel erreicht: <span class="bold-text">{{ entry.goalReached ? 'Ja' : 'Nein' }}</span></p>
+              <button @click="deleteEntry(entry.id)">Löschen</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -98,3 +110,5 @@ export default {
   }
 }
 </script>
+
+<style src="src/assets/trainingEntries.css"></style>
