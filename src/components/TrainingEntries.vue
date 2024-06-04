@@ -14,7 +14,7 @@
   <div class="training-entries">
     <h2>Trainingsübersicht</h2>
     <ul>
-      <li v-for="entry in entries" :key="entry.id">
+      <li v-for="entry in trainingEntries" :key="entry.id">
         <div class="entry">
           <h3>{{ entry.date }}</h3>
           <p>Ziel-Zeit: <span class="bold-text">{{ entry.targetTime }} h</span></p>
@@ -34,28 +34,35 @@ import axios from 'axios';
 
 export default {
   name: 'TrainingEntries',
-  props: {
-    entries: {
-      type: Array,
-      required: true
-    }
-  },
   data() {
     return {
       zielZeit: '',
       zielKilometer: '',
       gelaufeneKilometer: '',
-      gelaufeneZeit: ''
+      gelaufeneZeit: '',
+      trainingEntries: []
     }
   },
+  created() {
+    this.fetchEntries();
+  },
   methods: {
+    fetchEntries() {
+      axios.get(import.meta.env.VITE_BACKEND_URL + '/entries')
+          .then(function (response) {
+            this.trainingEntries = response.data;
+          }.bind(this))
+          .catch(function (error) {
+            console.log(error);
+          });
+    },
     goalReached(targetTime, targetKilometer, timeRan, kilometreRan) {
       return (targetTime === timeRan && targetKilometer === kilometreRan) ||
           (timeRan < targetTime && kilometreRan > targetKilometer);
     },
-    getCurrentDate(){
+    getCurrentDate() {
       const date = new Date();
-      return date.toISOString().slice(0,10);
+      return date.toISOString().slice(0, 10);
     },
     submitEntry() {
       const newEntry = {
@@ -69,8 +76,6 @@ export default {
 
       axios.post(import.meta.env.VITE_BACKEND_URL + '/entries', newEntry)
           .then(response => {
-            this.$emit('entry-added', response.data);
-            // Clear the input fields
             this.zielZeit = '';
             this.zielKilometer = '';
             this.gelaufeneKilometer = '';
@@ -84,8 +89,6 @@ export default {
     deleteEntry(entryId) {
       axios.delete(import.meta.env.VITE_BACKEND_URL + '/entries/' + entryId)
           .then(() => {
-            // Remove the deleted entry from the list
-            this.entries = this.entries.filter(entry => entry.id !== entryId);
             this.fetchEntries();
           })
           .catch(error => {
