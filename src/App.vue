@@ -14,5 +14,3 @@ export default {
   }
 }
 </script>
-
-<style src="./assets/appStyles.css"></style>
