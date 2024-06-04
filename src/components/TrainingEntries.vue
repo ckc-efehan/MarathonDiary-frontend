@@ -53,10 +53,9 @@ export default {
       return (targetTime === timeRan && targetKilometer === kilometreRan) ||
           (targetTime < timeRan || targetKilometer < kilometreRan);
     },
-    getCurrentDate() {
-      const today = new Date();
-      const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-      return today.toLocaleDateString('de-DE', options);
+    getCurrentDate(){
+      const date = new Date();
+      return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
     },
     submitEntry() {
       const newEntry = {
