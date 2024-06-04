@@ -53,8 +53,14 @@ export default {
       return (targetTime === timeRan && targetKilometer === kilometreRan) ||
           (targetTime < timeRan || targetKilometer < kilometreRan);
     },
+    getCurrentDate() {
+      const today = new Date();
+      const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+      return today.toLocaleDateString('de-DE', options);
+    },
     submitEntry() {
       const newEntry = {
+        date: this.getCurrentDate(),
         targetTime: parseFloat(this.zielZeit),
         targetKilometre: parseFloat(this.zielKilometer),
         kilometreRan: parseFloat(this.gelaufeneKilometer),
