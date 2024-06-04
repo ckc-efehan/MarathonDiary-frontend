@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <TrainingEntries />
+    <LoginView />
   </div>
 </template>
 
 <script>
-import TrainingEntries from './components/TrainingEntries.vue';
+import LoginView from './views/LoginView.vue';
 
 export default {
   name: 'App',
   components: {
-    TrainingEntries
+    LoginView
   }
 }
 </script>
