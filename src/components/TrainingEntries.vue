@@ -51,7 +51,7 @@ export default {
   methods: {
     goalReached(targetTime, targetKilometer, timeRan, kilometreRan) {
       return (targetTime === timeRan && targetKilometer === kilometreRan) ||
-          (targetTime < timeRan || targetKilometer < kilometreRan);
+          (timeRan < targetTime && kilometreRan > targetKilometer);
     },
     getCurrentDate(){
       const date = new Date();
