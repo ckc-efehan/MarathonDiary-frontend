@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TrainingEntries from './views/TrainingEntries.vue';
+import TrainingEntries from './components/TrainingEntries.vue';
 
 export default {
   name: 'App',
