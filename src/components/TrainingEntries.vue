@@ -113,3 +113,5 @@ export default {
 
 <style src="src/assets/trainingEntries.css"></style>
 
+
+
