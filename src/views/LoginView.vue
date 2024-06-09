@@ -6,13 +6,12 @@ const username = ref('');
 const password = ref('');
 
 const register = () => {
-  axios.post('/auth/register', {
+  axios.post(import.meta.env.VITE_BACKEND_URL + '/auth/register',{
     username: username.value,
     password: password.value
   })
       .then(response => {
         console.log('Registration successful:', response.data);
-        // Clear input fields after successful registration
       })
       .catch(error => {
         console.error('Registration error:', error.response.data);
