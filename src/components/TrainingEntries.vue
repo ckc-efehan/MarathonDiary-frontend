@@ -112,3 +112,4 @@ export default {
 </script>
 
 <style src="src/assets/trainingEntries.css"></style>
+
