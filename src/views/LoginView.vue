@@ -6,7 +6,7 @@ const username = ref('');
 const password = ref('');
 
 const register = () => {
-  axios.post(import.meta.env.VITE_BACKEND_URL + '/auth/register',{
+  axios.post(import.meta.env.VITE_BACKEND_URL + '/auth/register', {
     username: username.value,
     password: password.value
   })
@@ -15,6 +15,20 @@ const register = () => {
       })
       .catch(error => {
         console.error('Registration error:', error.response.data);
+      });
+};
+
+
+const login = () => {
+  axios.post(import.meta.env.VITE_BACKEND_URL + '/auth/login', {
+    username: username.value,
+    password: password.value
+  })
+      .then(response => {
+        console.log('Login successful:', response.data);
+      })
+      .catch(error => {
+        console.error('Login error:', error.response.data);
       });
 };
 
@@ -34,6 +48,7 @@ onMounted(() => {
   }
 });
 </script>
+
 
 
 
@@ -116,6 +131,9 @@ body{
   justify-content: center;
   flex-direction: column;
   height: 100vh;
+  width: 100vw; /* Setzt die Breite auf 100% des Viewports */
+  margin: 0; /* Entfernt den Rand um den Körper */
+  padding: 0; /* Entfernt das Polster um den Körper */
 }
 
 .container{
