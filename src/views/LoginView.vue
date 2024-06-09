@@ -1,4 +1,38 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import axios from 'axios';
+
+const username = ref('');
+const password = ref('');
+
+const register = () => {
+  axios.post('/auth/register', {
+    name: username.value,
+    password: password.value
+  })
+      .then(response => {
+        // Registration successful
+        console.log('Registration successful:', response.data);
+      })
+      .catch(error => {
+        console.error('Registration error:', error.response.data);
+      });
+}
+
+const login = () => {
+  axios.post('/auth/login', {
+    email: username.value,
+    password: password.value
+  })
+      .then(response => {
+        console.log('Login successful:', response.data);
+        // Here you can handle the successful login, such as redirecting to another page
+      })
+      .catch(error => {
+        console.error('Login error:', error.response.data);
+      });
+}
+
 import { onMounted } from 'vue';
 
 onMounted(() => {
@@ -16,6 +50,9 @@ onMounted(() => {
     });
   }
 });
+
+
+
 </script>
 
 
@@ -33,7 +70,7 @@ onMounted(() => {
 
   <div class="container" id="container">
     <div class="form-container sign-up">
-      <form>
+      <form @submit.prevent="register">
         <h1>Create Account</h1>
         <div class="social-icons">
           <a href="#" class="icon"><i class="fa-brands fa-google"></i></a>
@@ -41,14 +78,13 @@ onMounted(() => {
           <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
           <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
         </div>
-        <input type="text" placeholder="Name">
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <button>Sign Up</button>
+        <input v-model="username" type="text" placeholder="Name">
+        <input v-model="password" type="password" placeholder="Password">
+        <button type="submit">Sign Up</button>
       </form>
     </div>
     <div class="form-container sign-in">
-      <form>
+      <form @submit.prevent="login">
         <h1>Sign In</h1>
         <div class="social-icons">
           <a href="#" class="icon"><i class="fa-brands fa-google"></i></a>
@@ -56,10 +92,10 @@ onMounted(() => {
           <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
           <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
         </div>
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
+        <input v-model="username" type="email" placeholder="Email">
+        <input v-model="password" type="password" placeholder="Password">
         <a href="#">Forget Your Password?</a>
-        <button>Sign In</button>
+        <button type="submit">Sign In</button>
       </form>
     </div>
     <div class="toggle-container">

@@ -1,19 +1,37 @@
 <template>
   <div id="app">
-    <TrainingEntries />
+    <template v-if="isLoggedIn">
+      <TrainingEntries />
+    </template>
+    <template v-else>
+      <LoginView @loginSuccess="loginSuccess" />
+    </template>
   </div>
 </template>
 
 <script>
 import TrainingEntries from './components/TrainingEntries.vue';
+import LoginView from './components/LoginView.vue';
 
 export default {
   name: 'App',
   components: {
-    TrainingEntries
+    TrainingEntries,
+    LoginView
+  },
+  data() {
+    return {
+      isLoggedIn: false
+    }
+  },
+  methods: {
+    loginSuccess() {
+      this.isLoggedIn = true;
+    }
   }
 }
 </script>
 
-<style src="./assets/appStyles.css"></style>
-<style src="./assets/trainingEntries.css"></style>
+<style>
+/* Your global styles here */
+</style>
