@@ -1,5 +1,36 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import axios from 'axios';
+
+const username = ref('');
+const password = ref('');
+
+const register = () => {
+  axios.post(import.meta.env.VITE_BACKEND_URL + '/auth/register', {
+    username: username.value,
+    password: password.value
+  })
+      .then(response => {
+        console.log('Registration successful:', response.data);
+      })
+      .catch(error => {
+        console.error('Registration error:', error.response.data);
+      });
+};
+
+
+const login = () => {
+  axios.post(import.meta.env.VITE_BACKEND_URL + '/auth/login', {
+    username: username.value,
+    password: password.value
+  })
+      .then(response => {
+        console.log('Login successful:', response.data);
+      })
+      .catch(error => {
+        console.error('Login error:', error.response.data);
+      });
+};
 
 onMounted(() => {
   const container = document.getElementById('container');
@@ -19,6 +50,8 @@ onMounted(() => {
 </script>
 
 
+
+
 <template>
   <!doctype html>
   <html lang="en">
@@ -33,7 +66,7 @@ onMounted(() => {
 
   <div class="container" id="container">
     <div class="form-container sign-up">
-      <form>
+      <form @submit.prevent="register">
         <h1>Create Account</h1>
         <div class="social-icons">
           <a href="#" class="icon"><i class="fa-brands fa-google"></i></a>
@@ -41,14 +74,13 @@ onMounted(() => {
           <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
           <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
         </div>
-        <input type="text" placeholder="Name">
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <button>Sign Up</button>
+        <input v-model="username" type="text" placeholder="Name">
+        <input v-model="password" type="password" placeholder="Password">
+        <button type="submit">Sign Up</button>
       </form>
     </div>
     <div class="form-container sign-in">
-      <form>
+      <form @submit.prevent="login">
         <h1>Sign In</h1>
         <div class="social-icons">
           <a href="#" class="icon"><i class="fa-brands fa-google"></i></a>
@@ -56,21 +88,21 @@ onMounted(() => {
           <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
           <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
         </div>
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
+        <input v-model="username" type="text" placeholder="Name">
+        <input v-model="password" type="password" placeholder="Password">
         <a href="#">Forget Your Password?</a>
-        <button>Sign In</button>
+        <button type="submit">Sign In</button>
       </form>
     </div>
     <div class="toggle-container">
       <div class="toggle">
         <div class="toggle-panel toggle-left">
-          <h1>Welcome Back!</h1>
+          <h2>Welcome Back!</h2>
           <p>Enter your personal details to use all of site features</p>
           <button class="hidden" id="login">Sign In</button>
         </div>
         <div class="toggle-panel toggle-right">
-          <h1>Hello, Friend!</h1>
+          <h2>Hello, Friend!</h2>
           <p>Register with your personal details to use all of site features</p>
           <button class="hidden" id="register">Sign Up</button>
         </div>
@@ -99,6 +131,9 @@ body{
   justify-content: center;
   flex-direction: column;
   height: 100vh;
+  width: auto; /* Setzt die Breite auf auto */
+  margin: 0; /* Entfernt den Rand um den Körper */
+  padding: 0; /* Entfernt das Polster um den Körper */
 }
 
 .container{
@@ -107,9 +142,17 @@ body{
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
   position: relative;
   overflow: hidden;
-  width: 768px;
+  width: auto;
   max-width: 100%;
   min-height: 480px;
+}
+
+.container h1 {
+  color: #000; /* Setzt die Textfarbe auf Schwarz */
+}
+
+.container h2 {
+  color: #ffffff; /* Setzt die Textfarbe auf Schwarz */
 }
 
 .container p{
