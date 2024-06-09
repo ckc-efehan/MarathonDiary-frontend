@@ -97,12 +97,12 @@ onMounted(() => {
     <div class="toggle-container">
       <div class="toggle">
         <div class="toggle-panel toggle-left">
-          <h1>Welcome Back!</h1>
+          <h2>Welcome Back!</h2>
           <p>Enter your personal details to use all of site features</p>
           <button class="hidden" id="login">Sign In</button>
         </div>
         <div class="toggle-panel toggle-right">
-          <h1>Hello, Friend!</h1>
+          <h2>Hello, Friend!</h2>
           <p>Register with your personal details to use all of site features</p>
           <button class="hidden" id="register">Sign Up</button>
         </div>
@@ -149,6 +149,10 @@ body{
 
 .container h1 {
   color: #000; /* Setzt die Textfarbe auf Schwarz */
+}
+
+.container h2 {
+  color: #ffffff; /* Setzt die Textfarbe auf Schwarz */
 }
 
 .container p{
