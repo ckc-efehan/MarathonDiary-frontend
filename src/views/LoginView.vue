@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import axios from 'axios';
 
 const username = ref('');
@@ -7,33 +7,19 @@ const password = ref('');
 
 const register = () => {
   axios.post('/auth/register', {
-    name: username.value,
+    username: username.value,
     password: password.value
   })
       .then(response => {
-        // Registration successful
         console.log('Registration successful:', response.data);
+        // Clear input fields after successful registration
+        username.value = '';
+        password.value = '';
       })
       .catch(error => {
         console.error('Registration error:', error.response.data);
       });
-}
-
-const login = () => {
-  axios.post('/auth/login', {
-    email: username.value,
-    password: password.value
-  })
-      .then(response => {
-        console.log('Login successful:', response.data);
-        // Here you can handle the successful login, such as redirecting to another page
-      })
-      .catch(error => {
-        console.error('Login error:', error.response.data);
-      });
-}
-
-import { onMounted } from 'vue';
+};
 
 onMounted(() => {
   const container = document.getElementById('container');
@@ -50,10 +36,8 @@ onMounted(() => {
     });
   }
 });
-
-
-
 </script>
+
 
 
 <template>
@@ -92,7 +76,7 @@ onMounted(() => {
           <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
           <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
         </div>
-        <input v-model="username" type="email" placeholder="Email">
+        <input v-model="username" type="text" placeholder="Name">
         <input v-model="password" type="password" placeholder="Password">
         <a href="#">Forget Your Password?</a>
         <button type="submit">Sign In</button>
