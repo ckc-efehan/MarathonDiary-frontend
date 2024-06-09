@@ -131,7 +131,7 @@ body{
   justify-content: center;
   flex-direction: column;
   height: 100vh;
-  width: 100vw; /* Setzt die Breite auf 100% des Viewports */
+  width: auto; /* Setzt die Breite auf auto */
   margin: 0; /* Entfernt den Rand um den Körper */
   padding: 0; /* Entfernt das Polster um den Körper */
 }
@@ -142,7 +142,7 @@ body{
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
   position: relative;
   overflow: hidden;
-  width: 768px;
+  width: auto;
   max-width: 100%;
   min-height: 480px;
 }
