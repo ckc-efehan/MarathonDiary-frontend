@@ -11,7 +11,7 @@
 
 <script>
 import TrainingEntries from './components/TrainingEntries.vue';
-import LoginView from './components/LoginView.vue';
+import LoginView from './views/LoginView.vue';
 
 export default {
   name: 'App',
