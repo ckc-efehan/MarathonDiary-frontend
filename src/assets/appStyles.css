@@ -17,11 +17,10 @@ body {
 
 #app {
     min-height: 100vh;
-    width: auto;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-sizing: border-box;
 }
 
 .navbar {
@@ -108,4 +107,3 @@ body {
     display: flex;
     flex-direction: column;
 }
-
