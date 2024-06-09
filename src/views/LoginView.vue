@@ -147,6 +147,10 @@ body{
   min-height: 480px;
 }
 
+.container h1 {
+  color: #000; /* Setzt die Textfarbe auf Schwarz */
+}
+
 .container p{
   font-size: 14px;
   line-height: 20px;
