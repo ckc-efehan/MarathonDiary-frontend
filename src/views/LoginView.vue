@@ -13,8 +13,6 @@ const register = () => {
       .then(response => {
         console.log('Registration successful:', response.data);
         // Clear input fields after successful registration
-        username.value = '';
-        password.value = '';
       })
       .catch(error => {
         console.error('Registration error:', error.response.data);
