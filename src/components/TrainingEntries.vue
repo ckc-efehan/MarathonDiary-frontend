@@ -23,7 +23,7 @@
       </div>
       <div class="training-entries">
         <h2>Trainingsübersicht</h2>
-        <ul>
+        <ul v-if="trainingEntries.length > 0">
           <li v-for="entry in trainingEntries" :key="entry.id">
             <div class="entry">
               <h3>{{ entry.date }}</h3>
@@ -36,6 +36,7 @@
             </div>
           </li>
         </ul>
+        <p v-else>Keine Einträge vorhanden.</p>
       </div>
     </div>
   </div>
