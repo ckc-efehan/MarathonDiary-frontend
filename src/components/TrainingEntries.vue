@@ -11,9 +11,9 @@
     <div class="content">
       <div class="newtrainingsentry">
         <h2>Neuer Trainingseintrag</h2>
-        <span>Geben Sie hier ein wie viele Kilometer Ihr Ziel ist</span>
-        <input v-model="zielZeit" type="text" placeholder="Ziel-Zeit">
         <span>Geben Sie hier ein in welcher Zeit (in Stunden) Sie das schaffen wollen</span>
+        <input v-model="zielZeit" type="text" placeholder="Ziel-Zeit">
+        <span>Geben Sie hier ein wie viele Kilometer Ihr Ziel ist</span>
         <input v-model="zielKilometer" type="text" placeholder="Ziel-Kilometer">
         <span>Geben Sie hier ein wie viel Kilometer Sie gerannt sind</span>
         <input v-model="gelaufeneKilometer" type="text" placeholder="Gelaufene Kilometer">
