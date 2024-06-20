@@ -14,7 +14,7 @@
         <input v-model="zielZeit" type="text" placeholder="Ziel-Zeit">
         <span>Geben Sie hier ein wie viele Kilometer Ihr Ziel ist</span>
         <input v-model="zielKilometer" type="text" placeholder="Ziel-Kilometer">
-        <span>Geben Sie hier ein wie viel Kilometer Sie gerannt sind</span>
+        <span>Geben Sie hier ein wie viel Kilometer Sie gelaufen sind</span>
         <input v-model="gelaufeneKilometer" type="text" placeholder="Gelaufene Kilometer">
         <span>Geben Sie hier ein in welcher Zeit (in Stunden) Sie die Kilometer gelaufen sind</span>
         <input v-model="gelaufeneZeit" type="text" placeholder="Gelaufene Zeit">
