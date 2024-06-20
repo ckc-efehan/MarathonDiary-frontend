@@ -116,3 +116,16 @@
     width: 100%;
     outline: none;
 }
+/* Schlichter Stil für den Text "Keine Einträge vorhanden" */
+.no-entries {
+    color: var(--text-color);
+    text-align: center;
+    font-size: 16px;
+    font-weight: normal;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 20px;
+    box-shadow: none;
+}

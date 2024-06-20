@@ -36,7 +36,7 @@
             </div>
           </li>
         </ul>
-        <p v-else>Keine Einträge vorhanden.</p>
+        <p v-else class="no-entries">Keine Einträge vorhanden.</p>
       </div>
     </div>
   </div>
