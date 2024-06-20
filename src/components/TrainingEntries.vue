@@ -60,14 +60,13 @@ export default {
     this.fetchEntries();
   },
   methods: {
-    fetchEntries() {
-      axios.get(import.meta.env.VITE_BACKEND_URL + '/entries')
-          .then(function (response) {
-            this.trainingEntries = response.data;
-          }.bind(this))
-          .catch(function (error) {
-            console.log(error);
-          });
+    async fetchEntries() {
+      try {
+        const response = await axios.get(import.meta.env.VITE_BACKEND_URL + '/entries');
+        this.trainingEntries = response.data;
+      } catch (error) {
+        console.error(error);
+      }
     },
     goalReached(targetTime, targetKilometer, timeRan, kilometreRan) {
       return (targetTime === timeRan && targetKilometer === kilometreRan) ||
@@ -77,7 +76,7 @@ export default {
       const date = new Date();
       return date.toISOString().slice(0, 10);
     },
-    submitEntry() {
+    async submitEntry() {
       const newEntry = {
         date: this.getCurrentDate(),
         targetTime: parseFloat(this.zielZeit),
@@ -87,32 +86,27 @@ export default {
         goalReached: this.goalReached(parseFloat(this.zielZeit), parseFloat(this.zielKilometer), parseFloat(this.gelaufeneZeit), parseFloat(this.gelaufeneKilometer))
       };
 
-      axios.post(import.meta.env.VITE_BACKEND_URL + '/entries', newEntry)
-          .then(response => {
-            this.zielZeit = '';
-            this.zielKilometer = '';
-            this.gelaufeneKilometer = '';
-            this.gelaufeneZeit = '';
-            this.fetchEntries();
-          })
-          .catch(error => {
-            console.error('Error adding entry:', error);
-          });
+      try {
+        await axios.post(import.meta.env.VITE_BACKEND_URL + '/entries', newEntry);
+        this.zielZeit = '';
+        this.zielKilometer = '';
+        this.gelaufeneKilometer = '';
+        this.gelaufeneZeit = '';
+        this.fetchEntries();
+      } catch (error) {
+        console.error('Error adding entry:', error);
+      }
     },
-    deleteEntry(entryId) {
-      axios.delete(import.meta.env.VITE_BACKEND_URL + '/entries/' + entryId)
-          .then(() => {
-            this.fetchEntries();
-          })
-          .catch(error => {
-            console.error('Error deleting entry:', error);
-          });
+    async deleteEntry(entryId) {
+      try {
+        await axios.delete(import.meta.env.VITE_BACKEND_URL + '/entries/' + entryId);
+        this.fetchEntries();
+      } catch (error) {
+        console.error('Error deleting entry:', error);
+      }
     }
   }
 }
 </script>
 
 <style src="src/assets/trainingEntries.css"></style>
-
-
-
