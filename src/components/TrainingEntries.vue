@@ -4,7 +4,6 @@
       <div class="navbar-container">
         <h1>Meine Trainingsseite</h1>
         <ul class="navbar-nav">
-          <li><a href="#"><i class="fas fa-home"></i> Abmelden</a></li>
         </ul>
       </div>
     </nav>
@@ -19,7 +18,8 @@
         <input v-model="gelaufeneKilometer" type="text" placeholder="Gelaufene Kilometer">
         <span>Geben Sie hier ein in welcher Zeit (in Stunden) Sie die Kilometer gelaufen sind</span>
         <input v-model="gelaufeneZeit" type="text" placeholder="Gelaufene Zeit">
-        <button @click="submitEntry">Senden</button>
+        <button v-if="!editMode" @click="submitEntry">Senden</button>
+        <button v-if="editMode" @click="updateEntry">Änderungen speichern</button>
       </div>
       <div class="training-entries">
         <h2>Trainingsübersicht</h2>
@@ -32,12 +32,23 @@
               <p>Gelaufene Kilometer: <span class="bold-text">{{ entry.kilometreRan }} km</span></p>
               <p>Benötigte Zeit: <span class="bold-text">{{ entry.timeRan }} h</span></p>
               <p>Ziel erreicht: <span class="bold-text">{{ entry.goalReached ? 'Ja' : 'Nein' }}</span></p>
-              <button @click="deleteEntry(entry.id)">Löschen</button>
+              <div class="button-container">
+                <button class="edit" @click="editEntry(entry)">Bearbeiten</button>
+                <button class="delete" @click="deleteEntry(entry.id)">Löschen</button>
+              </div>
             </div>
           </li>
         </ul>
         <p v-else class="no-entries">Keine Einträge vorhanden.</p>
       </div>
+      <div class="statistics">
+        <h2>Statistiken</h2>
+        <p>Durchschnittliche Laufzeit:  <span class="bold-text">{{ averageTime }} h</span></p>
+        <p>Gesamte gelaufene Distanz:  <span class="bold-text">{{ totalDistance }} km</span></p>
+        <p>Gesamtanzahl der Trainingseinheiten:  <span class="bold-text">{{ totalEntries }}</span></p>
+        <p>Prozentualer Anteil der erreichten Ziele:  <span class="bold-text">{{ goalAchievementRate }}%</span></p>
+      </div>
+
     </div>
   </div>
 </template>
@@ -53,7 +64,9 @@ export default {
       zielKilometer: '',
       gelaufeneKilometer: '',
       gelaufeneZeit: '',
-      trainingEntries: []
+      trainingEntries: [],
+      editMode: false,
+      currentEntryId: null
     }
   },
   created() {
@@ -97,6 +110,35 @@ export default {
         console.error('Error adding entry:', error);
       }
     },
+    async editEntry(entry) {
+      this.editMode = true;
+      this.currentEntryId = entry.id;
+      this.zielZeit = entry.targetTime;
+      this.zielKilometer = entry.targetKilometre;
+      this.gelaufeneKilometer = entry.kilometreRan;
+      this.gelaufeneZeit = entry.timeRan;
+    },
+    async updateEntry() {
+      const updatedEntry = {
+        targetTime: parseFloat(this.zielZeit),
+        targetKilometre: parseFloat(this.zielKilometer),
+        kilometreRan: parseFloat(this.gelaufeneKilometer),
+        timeRan: parseFloat(this.gelaufeneZeit),
+        goalReached: this.goalReached(parseFloat(this.zielZeit), parseFloat(this.zielKilometer), parseFloat(this.gelaufeneZeit), parseFloat(this.gelaufeneKilometer))
+      };
+
+      try {
+        await axios.put(`${import.meta.env.VITE_BACKEND_URL}/entries/${this.currentEntryId}`, updatedEntry);
+        this.zielZeit = '';
+        this.zielKilometer = '';
+        this.gelaufeneKilometer = '';
+        this.gelaufeneZeit = '';
+        this.editMode = false;
+        this.fetchEntries();
+      } catch (error) {
+        console.error('Error updating entry:', error);
+      }
+    },
     async deleteEntry(entryId) {
       try {
         await axios.delete(import.meta.env.VITE_BACKEND_URL + '/entries/' + entryId);
@@ -104,6 +146,24 @@ export default {
       } catch (error) {
         console.error('Error deleting entry:', error);
       }
+    }
+  },
+  computed: {
+    averageTime() {
+      if (this.trainingEntries.length === 0) return 0;
+      const total = this.trainingEntries.reduce((sum, entry) => sum + entry.timeRan, 0);
+      return (total / this.trainingEntries.length).toFixed(2);
+    },
+    totalDistance() {
+      return this.trainingEntries.reduce((sum, entry) => sum + entry.kilometreRan, 0).toFixed(2);
+    },
+    totalEntries() {
+      return this.trainingEntries.length;
+    },
+    goalAchievementRate() {
+      if (this.trainingEntries.length === 0) return 0;
+      const achieved = this.trainingEntries.filter(entry => entry.goalReached).length;
+      return ((achieved / this.trainingEntries.length) * 100).toFixed(2);
     }
   }
 }

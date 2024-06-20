@@ -1,39 +1,103 @@
-.training-entries {
-    background-color: var(--background-color);
-    padding: 20px;
-    border-radius: 20px;
-    width: 100%;
-    max-width: 600px; /* Feste maximale Breite */
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    overflow-y: auto;
-    max-height: 75vh;
+/* Allgemeine Container-Stile */
+#app {
+    font-family: 'Roboto', sans-serif;
 }
 
-.training-entries button {
-    background-color: #950e0e;
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.navbar a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.newtrainingsentry, .training-entries {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 45%;
+}
+
+.newtrainingsentry h2, .training-entries h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.newtrainingsentry input, .newtrainingsentry span {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.newtrainingsentry input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.newtrainingsentry button {
+    background-color: #512da8;
     color: #fff;
-    font-size: 12px;
-    padding: 10px 45px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-size: 14px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     text-transform: uppercase;
     margin-top: 10px;
-    cursor: pointer;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
 }
 
-@media (min-width: 768px) {
-    .training-entries {
-        max-width: 600px;
-    }
+.newtrainingsentry button:hover {
+    background-color: #311b92;
 }
 
-.training-entries h2 {
-    color: var(--text-color);
+.statistics {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 25%;
     text-align: center;
+}
+
+.statistics h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.statistics p {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #666;
+    border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
+}
+
+.statistics .bold-number {
+    font-weight: bold;
 }
 
 .training-entries ul {
@@ -42,25 +106,15 @@
 }
 
 .training-entries li {
-    background: var(--background-color);
+    background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 10px;
     padding: 15px;
-    transition: transform 0.3s;
-}
-
-.training-entries li:hover {
-    transform: translateY(-5px);
 }
 
 .entry h3 {
-    color: var(--primary-color);
-    transition: color 0.3s;
-}
-
-.entry h3:hover {
-    color: var(--hover-color);
+    color: #1e88e5;
 }
 
 .entry p {
@@ -72,60 +126,50 @@
     font-weight: bold;
 }
 
-/* Stil für neuen Trainingseintrag */
-
-.newtrainingsentry {
-    background-color: var(--background-color);
-    padding: 20px;
-    border-radius: 20px;
-    width: 100%;
-    max-width: 600px; /* Feste maximale Breite */
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    overflow-y: auto;
-    max-height: 75vh;
+.button-container {
+    display: flex;
+    justify-content: space-between;
 }
 
-.newtrainingsentry h2 {
-    color: var(--text-color);
-    text-align: center;
-    padding-bottom: 10px;
-}
-
-.newtrainingsentry button {
-    background-color: #512da8;
+.button-container button {
     color: #fff;
-    font-size: 12px;
-    padding: 10px 45px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-top: 10px;
+    font-size: 14px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    box-shadow: none; /* Kein Schatten */
 }
 
-.newtrainingsentry input {
-    background-color: #eee;
-    border: none;
-    margin: 8px 0;
-    padding: 10px 15px;
-    font-size: 13px;
-    border-radius: 8px;
-    width: 100%;
-    outline: none;
+.button-container button.delete {
+    background-color: #950e0e;
 }
-/* Schlichter Stil für den Text "Keine Einträge vorhanden" */
+
+.button-container button.delete:hover {
+    background-color: #750c0c;
+}
+
+.button-container button.edit {
+    background-color: #d3d3d3; /* Helles Grau */
+    color: #333; /* Dunklere Schriftfarbe */
+}
+
+.button-container button.edit:hover {
+    background-color: #b0b0b0; /* Etwas dunkleres Grau beim Hover */
+}
+
+/* Stil für den Container "Keine Einträge vorhanden" */
 .no-entries {
-    color: var(--text-color);
+    font-size: 14px; /* Kleinere Schriftgröße */
+    color: #999999; /* Hellgraue Farbe */
     text-align: center;
-    font-size: 16px;
-    font-weight: normal;
+    background-color: #f5f5f5; /* Helleres Grau für den Hintergrund */
     padding: 10px;
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-top: 20px;
-    box-shadow: none;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    border: none; /* Keine Umrandung */
 }
