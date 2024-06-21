@@ -42,7 +42,7 @@
         <p v-else class="no-entries">Keine Einträge vorhanden.</p>
       </div>
       <div class="statistics">
-        <h2>Statistiken</h2>
+        <h2>Ihre Statistik</h2>
         <p>Durchschnittliche Laufzeit:  <span class="bold-text">{{ averageTime }} h</span></p>
         <p>Gesamte gelaufene Distanz:  <span class="bold-text">{{ totalDistance }} km</span></p>
         <p>Gesamtanzahl der Trainingseinheiten:  <span class="bold-text">{{ totalEntries }}</span></p>
