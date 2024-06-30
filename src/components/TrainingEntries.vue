@@ -51,7 +51,7 @@
       </div>
       <div class="statistics">
         <h2>Ihre Statistik</h2>
-        <p>Durchschnittliche Laufzeit:  <span class="bold-text">{{ averageTime }} h</span></p>
+        <p>Gesamte Laufzeit:  <span class="bold-text">{{ totalTime }} h</span></p>
         <p>Gesamte gelaufene Distanz:  <span class="bold-text">{{ totalDistance }} km</span></p>
         <p>Gesamtanzahl der Trainingseinheiten:  <span class="bold-text">{{ totalEntries }}</span></p>
         <p>Prozentualer Anteil der erreichten Ziele:  <span class="bold-text">{{ goalAchievementRate }}%</span></p>
@@ -166,10 +166,8 @@ export default {
       const goalReached = this.filterGoalReached === 'true';
       return this.trainingEntries.filter(entry => entry.goalReached === goalReached);
     },
-    averageTime() {
-      if (this.trainingEntries.length === 0) return 0;
-      const total = this.trainingEntries.reduce((sum, entry) => sum + entry.timeRan, 0);
-      return (total / this.trainingEntries.length).toFixed(2);
+    totalTime() {
+      return this.trainingEntries.reduce((sum, entry) => sum + entry.timeRan, 0).toFixed(2);
     },
     totalDistance() {
       return this.trainingEntries.reduce((sum, entry) => sum + entry.kilometreRan, 0).toFixed(2);
