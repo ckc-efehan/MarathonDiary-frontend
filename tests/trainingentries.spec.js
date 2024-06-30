@@ -68,6 +68,7 @@ describe('TrainingEntries.vue', () => {
         await wrapper.vm.fetchEntries();  // Manuell die fetchEntries Methode aufrufen
 
         expect(axios.put).toHaveBeenCalledWith(`${backendUrl}/1`, {
+            date: '2024-06-28',
             targetTime: 2,
             targetKilometre: 10,
             kilometreRan: 8,

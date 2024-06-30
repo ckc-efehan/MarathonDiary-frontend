@@ -74,6 +74,7 @@ export default {
       trainingEntries: [],
       editMode: false,
       currentEntryId: null,
+      currentEntryDate: null,  // Neue Eigenschaft für das Datum
       filterGoalReached: 'all'
     }
   },
@@ -120,6 +121,7 @@ export default {
     async editEntry(entry) {
       this.editMode = true;
       this.currentEntryId = entry.id;
+      this.currentEntryDate = entry.date;  // Speichern des ursprünglichen Datums
       this.zielZeit = entry.targetTime;
       this.zielKilometer = entry.targetKilometre;
       this.gelaufeneKilometer = entry.kilometreRan;
@@ -127,7 +129,7 @@ export default {
     },
     async updateEntry() {
       const updatedEntry = {
-        date: this.getCurrentDate(),
+        date: this.currentEntryDate,  // Verwenden des gespeicherten Datums
         targetTime: parseFloat(this.zielZeit),
         targetKilometre: parseFloat(this.zielKilometer),
         kilometreRan: parseFloat(this.gelaufeneKilometer),
