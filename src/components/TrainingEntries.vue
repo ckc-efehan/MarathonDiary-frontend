@@ -82,8 +82,7 @@ export default {
       }
     },
     goalReached(targetTime, targetKilometer, timeRan, kilometreRan) {
-      return (targetTime === timeRan && targetKilometer === kilometreRan) ||
-          (timeRan < targetTime && kilometreRan > targetKilometer);
+      return (timeRan <= targetTime && kilometreRan >= targetKilometer);
     },
     getCurrentDate() {
       const date = new Date();
