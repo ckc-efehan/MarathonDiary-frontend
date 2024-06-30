@@ -3,7 +3,8 @@
     <nav class="navbar">
       <div class="navbar-container">
         <h1>Meine Trainingsseite</h1>
-        <ul class="navbar-nav"></ul>
+        <ul class="navbar-nav">
+        </ul>
       </div>
     </nav>
     <div class="content">
@@ -22,19 +23,8 @@
       </div>
       <div class="training-entries">
         <h2>Trainingsübersicht</h2>
-        <div class="filter-options">
-          <input v-model="searchQuery" type="text" placeholder="Suche nach Datum">
-          <label>
-            <span>Ziel erreicht:</span>
-            <select v-model="goalFilter">
-              <option value="">Alle</option>
-              <option value="true">Ja</option>
-              <option value="false">Nein</option>
-            </select>
-          </label>
-        </div>
-        <ul v-if="filteredEntries.length > 0">
-          <li v-for="entry in filteredEntries" :key="entry.id">
+        <ul v-if="trainingEntries.length > 0">
+          <li v-for="entry in trainingEntries" :key="entry.id">
             <div class="entry">
               <h3>{{ entry.date }}</h3>
               <p>Ziel-Zeit: <span class="bold-text">{{ entry.targetTime }} h</span></p>
@@ -62,8 +52,6 @@
   </div>
 </template>
 
-
-
 <script>
 import axios from 'axios';
 
@@ -77,9 +65,7 @@ export default {
       gelaufeneZeit: '',
       trainingEntries: [],
       editMode: false,
-      currentEntryId: null,
-      searchQuery: '',
-      goalFilter: ''
+      currentEntryId: null
     }
   },
   created() {
@@ -161,13 +147,6 @@ export default {
     }
   },
   computed: {
-    filteredEntries() {
-      return this.trainingEntries.filter(entry => {
-        const matchesDate = entry.date.includes(this.searchQuery);
-        const matchesGoal = this.goalFilter === '' || entry.goalReached === (this.goalFilter === 'true');
-        return matchesDate && matchesGoal;
-      });
-    },
     averageTime() {
       if (this.trainingEntries.length === 0) return 0;
       const total = this.trainingEntries.reduce((sum, entry) => sum + entry.timeRan, 0);
