@@ -24,7 +24,7 @@
       <div class="training-entries">
         <h2>Trainingsübersicht</h2>
         <div class="filter">
-          <label for="filter">Ziel erreicht filtern:</label>
+          <label for="filter">Ziel erreicht filtern nach:</label>
           <select v-model="filterGoalReached" @change="fetchEntries">
             <option value="all">Alle</option>
             <option value="true">Ja</option>
@@ -47,7 +47,7 @@
             </div>
           </li>
         </ul>
-        <p v-else class="no-entries">Keine Einträge vorhanden.</p>
+        <p v-else class="no-entries">Keine Einträge gefunden.</p>
       </div>
       <div class="statistics">
         <h2>Ihre Statistik</h2>
@@ -127,6 +127,7 @@ export default {
     },
     async updateEntry() {
       const updatedEntry = {
+        date: this.getCurrentDate(),
         targetTime: parseFloat(this.zielZeit),
         targetKilometre: parseFloat(this.zielKilometer),
         kilometreRan: parseFloat(this.gelaufeneKilometer),
