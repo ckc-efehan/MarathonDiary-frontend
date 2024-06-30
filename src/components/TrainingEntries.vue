@@ -24,15 +24,24 @@
       <div class="training-entries">
         <h2>Trainingsübersicht</h2>
         <div class="filter">
-          <label for="filter">Ziel erreicht filtern nach:</label>
-          <select v-model="filterGoalReached" @change="fetchEntries">
-            <option value="all">Alle</option>
-            <option value="true">Ja</option>
-            <option value="false">Nein</option>
-          </select>
+          <div class="filter-row">
+            <label for="filterGoal">Ziel erreicht filtern:</label>
+            <select v-model="filterGoalReached" @change="fetchEntries">
+              <option value="all">Alle</option>
+              <option value="true">Ja</option>
+              <option value="false">Nein</option>
+            </select>
+          </div>
+          <div class="filter-row">
+            <label for="sortDate">Sortieren nach Datum:</label>
+            <select v-model="sortDate" @change="sortEntries">
+              <option value="desc">Absteigend</option>
+              <option value="asc">Aufsteigend</option>
+            </select>
+          </div>
         </div>
-        <ul v-if="filteredEntries.length > 0">
-          <li v-for="entry in filteredEntries" :key="entry.id">
+        <ul v-if="sortedEntries.length > 0">
+          <li v-for="entry in sortedEntries" :key="entry.id">
             <div class="entry">
               <h3>{{ entry.date }}</h3>
               <p>Ziel-Zeit: <span class="bold-text">{{ entry.targetTime }} h</span></p>
@@ -47,11 +56,11 @@
             </div>
           </li>
         </ul>
-        <p v-else class="no-entries">Keine Einträge gefunden.</p>
+        <p v-else class="no-entries">Keine Einträge vorhanden.</p>
       </div>
       <div class="statistics">
         <h2>Ihre Statistik</h2>
-        <p>Gesamte Laufzeit:  <span class="bold-text">{{ totalTime }} h</span></p>
+        <p>Durchschnittliche Laufzeit:  <span class="bold-text">{{ totalTime }} h</span></p>
         <p>Gesamte gelaufene Distanz:  <span class="bold-text">{{ totalDistance }} km</span></p>
         <p>Gesamtanzahl der Trainingseinheiten:  <span class="bold-text">{{ totalEntries }}</span></p>
         <p>Prozentualer Anteil der erreichten Ziele:  <span class="bold-text">{{ goalAchievementRate }}%</span></p>
@@ -74,8 +83,9 @@ export default {
       trainingEntries: [],
       editMode: false,
       currentEntryId: null,
-      currentEntryDate: null,  // Neue Eigenschaft für das Datum
-      filterGoalReached: 'all'
+      currentEntryDate: null,
+      filterGoalReached: 'all',
+      sortDate: 'desc'
     }
   },
   created() {
@@ -86,6 +96,7 @@ export default {
       try {
         const response = await axios.get(import.meta.env.VITE_BACKEND_URL + '/entries');
         this.trainingEntries = response.data;
+        this.sortEntries();  // Einträge nach Abruf sortieren
       } catch (error) {
         console.error(error);
       }
@@ -121,7 +132,7 @@ export default {
     async editEntry(entry) {
       this.editMode = true;
       this.currentEntryId = entry.id;
-      this.currentEntryDate = entry.date;  // Speichern des ursprünglichen Datums
+      this.currentEntryDate = entry.date;
       this.zielZeit = entry.targetTime;
       this.zielKilometer = entry.targetKilometre;
       this.gelaufeneKilometer = entry.kilometreRan;
@@ -129,7 +140,7 @@ export default {
     },
     async updateEntry() {
       const updatedEntry = {
-        date: this.currentEntryDate,  // Verwenden des gespeicherten Datums
+        date: this.currentEntryDate,
         targetTime: parseFloat(this.zielZeit),
         targetKilometre: parseFloat(this.zielKilometer),
         kilometreRan: parseFloat(this.gelaufeneKilometer),
@@ -156,6 +167,15 @@ export default {
       } catch (error) {
         console.error('Error deleting entry:', error);
       }
+    },
+    sortEntries() {
+      this.trainingEntries.sort((a, b) => {
+        if (this.sortDate === 'asc') {
+          return new Date(a.date) - new Date(b.date);
+        } else {
+          return new Date(b.date) - new Date(a.date);
+        }
+      });
     }
   },
   computed: {
@@ -165,6 +185,9 @@ export default {
       }
       const goalReached = this.filterGoalReached === 'true';
       return this.trainingEntries.filter(entry => entry.goalReached === goalReached);
+    },
+    sortedEntries() {
+      return this.filteredEntries;
     },
     totalTime() {
       return this.trainingEntries.reduce((sum, entry) => sum + entry.timeRan, 0).toFixed(2);
