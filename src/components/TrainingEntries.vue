@@ -23,8 +23,16 @@
       </div>
       <div class="training-entries">
         <h2>Trainingsübersicht</h2>
-        <ul v-if="trainingEntries.length > 0">
-          <li v-for="entry in trainingEntries" :key="entry.id">
+        <div class="filter">
+          <label for="filter">Ziel erreicht filtern:</label>
+          <select v-model="filterGoalReached" @change="fetchEntries">
+            <option value="all">Alle</option>
+            <option value="true">Ja</option>
+            <option value="false">Nein</option>
+          </select>
+        </div>
+        <ul v-if="filteredEntries.length > 0">
+          <li v-for="entry in filteredEntries" :key="entry.id">
             <div class="entry">
               <h3>{{ entry.date }}</h3>
               <p>Ziel-Zeit: <span class="bold-text">{{ entry.targetTime }} h</span></p>
@@ -65,7 +73,8 @@ export default {
       gelaufeneZeit: '',
       trainingEntries: [],
       editMode: false,
-      currentEntryId: null
+      currentEntryId: null,
+      filterGoalReached: 'all'
     }
   },
   created() {
@@ -147,6 +156,13 @@ export default {
     }
   },
   computed: {
+    filteredEntries() {
+      if (this.filterGoalReached === 'all') {
+        return this.trainingEntries;
+      }
+      const goalReached = this.filterGoalReached === 'true';
+      return this.trainingEntries.filter(entry => entry.goalReached === goalReached);
+    },
     averageTime() {
       if (this.trainingEntries.length === 0) return 0;
       const total = this.trainingEntries.reduce((sum, entry) => sum + entry.timeRan, 0);
