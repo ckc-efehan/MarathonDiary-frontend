@@ -92,17 +92,17 @@ describe('TrainingEntries.vue', () => {
         expect(axios.delete).toHaveBeenCalledWith(`${backendUrl}/1`);
     });
 
-    it('should compute correct averageTime', () => {
+    it('should compute correct totalDistance', () => {
         const wrapper = mount(TrainingEntries);
         wrapper.setData({
             trainingEntries: [
-                { timeRan: 1 },
+                { timeRan: 5 },
                 { timeRan: 2 },
                 { timeRan: 3 }
             ]
         });
 
-        expect(wrapper.vm.averageTime).toBe('2.00');
+        expect(wrapper.vm.totalTime).toBe('10.00');
     });
 
     it('should compute correct totalDistance', () => {
