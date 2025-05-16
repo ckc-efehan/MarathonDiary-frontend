@@ -15,8 +15,6 @@ export default {
 }
 </script>
 
-
-
 <style src="./assets/appStyles.css"></style>
 <style src="./assets/trainingEntries.css"></style>
 
